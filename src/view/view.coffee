@@ -33,6 +33,8 @@ class Batman.View extends Batman.Object
   isDead: false
   isBackingView: false
 
+  @filters: {}
+
   constructor: ->
     @bindings = []
     @subviews = new Batman.Set
@@ -284,6 +286,9 @@ class Batman.View extends Batman.Object
 
     return if not target || target is Batman.container
     Batman.Property.forBaseAndKey(target, keypath)?.setValue(value)
+
+  @filter: (key, filter) ->
+    @filters[key] = filter
 
 Batman.container.$context ?= (node) ->
   while node
